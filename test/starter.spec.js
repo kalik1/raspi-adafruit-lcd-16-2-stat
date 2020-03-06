@@ -23,6 +23,7 @@ function grabStdout() {
 describe('Tests', () => {
   it(' Should Feel Good Doing Tests:', () => {
     const greetings = 'I Feel Good!'; //hello();
+    console.log(greetings);
     greetings.should.eql('I Feel Good!');
   })
 });

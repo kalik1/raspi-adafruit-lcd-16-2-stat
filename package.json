@@ -1,5 +1,5 @@
 {
-  "name": "raspi-adafruit-lcd-16-2-stat",
+  "name": "raspi-lcd-status",
   "version": "0.0.1",
   "description": "RaspBerry PI on Adafruit LCD 16x2 status Printer",
   "main": "./lib/index.js",
@@ -32,12 +32,11 @@
     "url": "https://git.unidata.it/LORA/raspi-lcd-16-2"
   },
   "publishConfig": {
-    "registry": "https://npmrepo.retelora.it"
+    "registry": "https://registry.npmjs.org"
   },
   "author": {
     "name": "G. Pillon"
   },
-  "private": "true",
   "contributors": [],
   "license": "MIT",
   "devDependencies": {
