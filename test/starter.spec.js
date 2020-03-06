@@ -1,4 +1,4 @@
-import hello from '../src/index.js';
+//import hello from '../src/index.js';
 
 let chai = require('chai');
 
@@ -20,9 +20,9 @@ function grabStdout() {
   };
 }
 
-describe('Hello', () => {
-  it('Print Default', () => {
-    const greetings = hello();
-    greetings.should.eql('Hello World!\n');
+describe('Tests', () => {
+  it(' Should Feel Good Doing Tests:', () => {
+    const greetings = 'I Feel Good!'; //hello();
+    greetings.should.eql('I Feel Good!');
   })
 });
