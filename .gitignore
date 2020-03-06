@@ -41,4 +41,4 @@ jspm_packages
 
 .idea
 
-package-lock.json
+#package-lock.json
