@@ -8,7 +8,7 @@ Node.js ES6 (aka ES2015) starter with [Babel.js](https://babeljs.io/) & [ESLint]
 ## Motivation
 
 ## Run
-vi `/etc/systemd/system/`
+vi `/etc/systemd/system/lcd-status.service`
 
 ```ini
 [Unit]
