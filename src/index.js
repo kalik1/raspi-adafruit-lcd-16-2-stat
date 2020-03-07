@@ -10,6 +10,7 @@ import {
 } from './cyclestates.functions'
 
 const lcd = new LcdPlate(1, 0x20);
+let lastState = null;
 
 (function setup() {
   lcd.backlight(lcd.colors.RED);

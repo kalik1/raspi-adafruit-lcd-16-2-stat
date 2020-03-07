@@ -9,9 +9,9 @@ let lastIpCalculationTime = null;
 export default function getExternalIpAndInfos(forceRecalc = false) {
   return new Promise((resolve,reject) => {
       if (!forceRecalc && oldIp && lastIpCalculationTime && (Date.now() - lastIpCalculationTime) < EXTERNAL_IP_CALCTIME) {
-      console.log('using cached:')
-      console.log(oldIp);
-      return oldIp;
+      //console.log('using cached:')
+      //console.log(oldIp);
+      return resolve(oldIp);
     }
     http.get('http://ipconfig.io/json', (res) => {
       const { statusCode } = res;

@@ -9,10 +9,10 @@ import {sleep} from './helpers.function'
 const CYCLE_STATES = ['cpuram', 'disk', 'internalIp', 'externalIp'];
 
 let currentCiclyngState = 0;
-let lastState = null;
 let looping = false;
 let cyclingPromise = null;
 let _lcd;
+let preventHang= false;
 
 export function initCycleState({lcd}) {
   _lcd = lcd
@@ -33,27 +33,30 @@ async function printInternalIp(forceExternalIp = false) {
 
 async function printExternalIp(forceExternalIp = false) {
   const externalIpv4 = await getExternalIpAndInfos().catch(err => console.error(err));
-  _lcd.message(`${externalIpv4.hostname}\n${externalIpv4.ip}`, true);
+  _lcd.message(`${externalIpv4.country}(${externalIpv4.city})\n${externalIpv4.ip}`, true);
 }
 
 async function printCpuRam() {
-  //const {avgIdle, avgTotal} = await osu.cpu.average();
+  //const {avgIdle, avgTotal} = await osu.cpu.average();  
   //const cpuUsage = (1-(avgIdle/avgTotal))*100;
   const cpuUsage = await osu.cpu.usage();
   const ramPct = (freemem()/totalmem()*100);
-  _lcd.message(`CPU: ${cpuUsage.toFixed(2)}%\n Used Mem: ${ramPct.toFixed(2)}%`, true);
+  _lcd.message(`CPU: ${cpuUsage.toFixed(2)}%\nUsed RAM: ${ramPct.toFixed(2)}%`, true);
 }
 
 async function printDisk() {
   const diskUsage = await osu.drive.info();
-  _lcd.message(`Free Disk: ${diskUsage.freeGb}GB\nUsed : ${diskUsage.usedPercentage}%`, true);
+  _lcd.message(`Free Disk: ${diskUsage.freeGb}GB\nUsed Disk: ${diskUsage.usedPercentage}%`, true);
 }
 
 async function cycleStates() {
   looping = true;
   while(looping) {
-    await setState(CYCLE_STATES[nextState()]);
-    await sleep(5000)
+    if (!preventHang) {
+      await setState(CYCLE_STATES[nextState()]);
+      await sleep(5000)
+    }
+  preventHang = false;
   }  
 } 
 
@@ -63,6 +66,7 @@ export function startCycleStates() {
 
 export async function stopCycleStates() {
   looping = false;
+  preventHang = true;
   await cyclingPromise;
   cyclingPromise = null;
 };
