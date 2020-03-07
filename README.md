@@ -7,6 +7,34 @@ Node.js ES6 (aka ES2015) starter with [Babel.js](https://babeljs.io/) & [ESLint]
 
 ## Motivation
 
+## Run
+vi `/etc/systemd/system/`
+
+```ini
+[Unit]
+Description=lcd-status
+After=syslog.target
+
+[Service]
+User=openhabian
+ExecStart=/usr/local/bin/lcd-status
+SuccessExitStatus=143
+ConditionPathExists=/usr/local/bin/lcd-status
+# end streama.service content
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash 
+git clone https://github.com/kalik1/raspi-adafruit-lcd-16-2-stat
+cd raspi-adafruit-lcd-16-2-sta
+npm link
+sudo -i
+npm link &&  systemctl enable lcd-status.service  && systemctl start lcd-status.service
+```
+
+
 I created this repo to use it as a starting point for build npm libaries using ES6 syntax.
 
 ### Babel.js
